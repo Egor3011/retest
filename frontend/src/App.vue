@@ -59,7 +59,7 @@
     </section>
 
     <footer class="footer">
-      © {{ year }} FastX — не храните крупные суммы на биржах. Берегите ключи.
+      © {{ year }} FastX — самый быстрый обменник криптовалюты в рубли.
     </footer>
   </div>
 </template>

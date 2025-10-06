@@ -77,6 +77,9 @@
     <p :style="{margin: '4px 2px 0', fontSize: '12px', color: meetsMinRub ? '#93a4b0' : '#fda4af'}">
       {{ meetsMinRub ? 'Минимальный вывод — 225 RUB' : 'Минимальная сумма к получению — 225 RUB' }}
     </p>
+    <p :style="{margin: '4px 2px 0', fontSize: '12px', color: meetsMinRub ? '#93a4b0' : '#fda4af'}">
+      {{ rubAmount < 1000 ? 'Маленькие суммы требуют больше времени на вывод (до 1 часа)' : '' }}
+    </p>
 
     <button class="submit-btn" type="submit" :disabled="!canSubmit">Создать заявку</button>
   </form>
