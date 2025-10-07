@@ -179,7 +179,8 @@ const coinLogo = computed(() => {
     USDT: '/coins/tether.svg',
     BTC: '/coins/Bitcoin.svg.png',
     ETH: '/coins/ethereum-eth.svg',
-    TON: '/coins/ton_symbol.png'
+    TON: '/coins/ton_symbol.png',
+    TOH: '/coins/ton_symbol.png'
   };
   return map[crypto.value] || '/coins/usdt.svg';
 });
