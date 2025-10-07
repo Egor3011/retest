@@ -10,6 +10,7 @@
             <option value="BTC">BTC</option>
             <option value="ETH">ETH</option>
             <option value="TON">TON</option>
+            <option value="TOH">TOH</option>
           </select>
           <input v-model.number="cryptoAmount" type="number" min="0" step="0.0001" placeholder="Сумма" />
           <span class="suffix">{{ crypto }}</span>

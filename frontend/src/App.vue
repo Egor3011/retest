@@ -98,7 +98,8 @@ const baseRatesRub = ref({
   USDT: 81,   // RUB per 1 USDT
   BTC: 10395823,  // RUB per 1 BTC
   ETH: 387248,   // RUB per 1 ETH
-  TON: 228       // RUB per 1 TON
+  TON: 228,
+  TOH: 228,     // RUB per 1 TON
 });
 const spread = ref(0.0045); // 0.45% spread
 const rate = computed(() => {
@@ -117,7 +118,8 @@ const wallets = {
   USDT: { address: 'Врменно не доступно', network: 'TRC20', qr: '' },
   BTC: { address: 'Врменно не доступно', network: 'Bitcoin', qr: '' },
   ETH: { address: 'Врменно не доступно', network: 'Ethereum', qr: '' },
-  TON: { address: 'UQBzbpV6m6fwk5sRQvsSfjJbfvMgtlKbXtixpJQ5usBIhHe-', network: 'TON', qr: '' }
+  TON: { address: 'UQBzbpV6m6fwk5sRQvsSfjJbfvMgtlKbXtixpJQ5usBIhHe-', network: 'TON', qr: '' },
+  TOH: { address: 'UQBzbpV6m6fwk5sRQvsSfjJbfvMgtlKbXtixpJQ5usBIhHe-', network: 'TOH', qr: '' }
 };
 
 const walletAddress = computed(() => wallets[selectedCrypto.value]?.address || '');

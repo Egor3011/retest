@@ -27,7 +27,10 @@
               <textarea :value="address" readonly rows="2"></textarea>
               <button class="copy-btn" @click="copy">Копировать</button>
             </div>
+
           </div>
+          
+          <div class="hint">Полностью скопируйте адрес кошелька</div>
 
           <div v-if="qr" class="qr-box">
             <img :src="qr" alt="QR" />
