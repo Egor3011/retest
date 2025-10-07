@@ -129,6 +129,31 @@ body {
 .item { display:flex; justify-content:space-between; color: var(--tg-muted); font-size: 13px; }
 .item strong { color: var(--tg-text); }
 
+.mode-switch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-lg);
+  padding: 4px;
+  margin: 0 0 12px;
+}
+.mode-btn {
+  background: transparent;
+  border: 0;
+  color: var(--tg-muted);
+  padding: 10px 12px;
+  border-radius: calc(var(--radius-md) - 2px);
+  font-weight: 600;
+  cursor: pointer;
+}
+.mode-btn.active {
+  background: linear-gradient(135deg, var(--tg-panel-2), var(--tg-panel));
+  color: var(--tg-text);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06), 0 6px 18px rgba(0,0,0,0.25);
+}
+
 .footer { color: var(--tg-muted); font-size: 12px; padding: 24px 16px; text-align:center; }
 
 @media (max-width: 920px) {

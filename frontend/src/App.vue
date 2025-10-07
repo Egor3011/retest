@@ -15,15 +15,33 @@
     <main class="container hero">
       <section class="panel exchange-card">
         <div class="exchange-header">
-          <h2 style="margin:0">Обмен криптовалюты → RUB</h2>
+          <h2 style="margin:0">{{ mode === 'exchange' ? 'Обмен криптовалюты → RUB' : 'Покупка Telegram ⭐' }}</h2>
           <span class="pill">~10-15 мин</span>
         </div>
 
-        <ExchangeForm
+        <div class="mode-switch">
+          <button
+            :class="['mode-btn', mode==='exchange' ? 'active' : '']"
+            @click="mode='exchange'"
+            type="button"
+          >RUB</button>
+          <button
+            :class="['mode-btn', mode==='stars' ? 'active' : '']"
+            @click="mode='stars'"
+            type="button"
+          >⭐ Звёзды</button>
+        </div>
+
+        <ExchangeForm v-if="mode==='exchange'"
           @submit-order="onSubmitOrder"
           :rate="rate"
           :crypto="selectedCrypto"
           @update:crypto="selectedCrypto = $event"
+        />
+
+        <StarsPurchase v-else
+          :rate="rate"
+          @submit-stars="onSubmitStars"
         />
 
         <PaymentModal
@@ -68,12 +86,14 @@
 import { computed, ref, watch, nextTick } from 'vue';
 import ExchangeForm from './components/ExchangeForm.vue';
 import PaymentModal from './components/PaymentModal.vue';
+import StarsPurchase from './components/StarsPurchase.vue';
 import QRCode from 'qrcode';
 
 const year = new Date().getFullYear();
 
 // Basic reactive rates per crypto (mock). In real app, fetch from backend.
 const selectedCrypto = ref('USDT');
+const mode = ref('exchange');
 const baseRatesRub = ref({
   USDT: 81,   // RUB per 1 USDT
   BTC: 10395823,  // RUB per 1 BTC
@@ -113,6 +133,13 @@ function onSubmitOrder(order) {
 function onConfirmTransfer() {
   isModalOpen.value = false;
   alert('Спасибо! Мы проверим перевод и свяжемся с вами.');
+}
+
+function onSubmitStars(payload) {
+  // Reuse wallet + modal
+  selectedCrypto.value = payload.crypto;
+  lastOrder.value = { crypto: payload.crypto, cryptoAmount: payload.cryptoAmount, rubAmount: payload.rub, bank: 'stars', card: '—', holder: payload.telegram, telegram: payload.telegram };
+  isModalOpen.value = true;
 }
 
 // Generate QR when modal opens or dependencies change
