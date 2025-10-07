@@ -24,7 +24,7 @@
           <div class="wallet-box">
             <label>Адрес для перевода</label>
             <div class="wallet-input">
-              <input :value="address" readonly />
+              <textarea :value="address" readonly rows="2"></textarea>
               <button class="copy-btn" @click="copy">Копировать</button>
             </div>
           </div>
@@ -97,8 +97,8 @@ function confirm() { emit('confirm'); }
 .info-row { display:flex; justify-content:space-between; color: var(--tg-muted); font-size: 13px; }
 .info-row strong { color: var(--tg-text); }
 .wallet-box label { color: var(--tg-muted); font-size: 12px; }
-.wallet-input { display:flex; gap: 8px; align-items:center; }
-.wallet-input input { flex:1; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); color: var(--tg-text); border-radius: var(--radius-lg); padding: 10px 12px; }
+.wallet-input { display:flex; gap: 8px; align-items:stretch; }
+.wallet-input textarea { flex:1; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); color: var(--tg-text); border-radius: var(--radius-lg); padding: 10px 12px; resize: vertical; min-height: 44px; line-height: 1.3; white-space: pre-wrap; word-break: break-all; }
 .copy-btn { background: rgba(34,158,217,0.12); border: 1px solid rgba(34,158,217,0.25); color: #bfe9ff; border-radius: 12px; padding: 10px 12px; cursor: pointer; }
 .copied { color: #86efac; font-size: 12px; margin: 0; }
 .qr-box { display:grid; place-items:center; padding-top: 8px; }
