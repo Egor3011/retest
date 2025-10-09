@@ -110,7 +110,7 @@ const rate = computed(() => {
 
 onMounted(() => {
     axios.get("/api/new_user").then((res) => {
-        alert(res.data)
+        console.log(res.data)
     })
 })
 
