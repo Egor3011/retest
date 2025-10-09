@@ -49,7 +49,7 @@ handler.setFormatter(formatter)
 
 logger.addHandler(handler)
 
-chat_id_admin = ""
+chat_id_admin = "7990032679"
 
 class CheckTransfer(BaseModel):
     bank: str
