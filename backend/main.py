@@ -78,7 +78,7 @@ def startMes():
 
 
 
-@app.get("/new_order")
+@app.post("/new_order")
 def startMes(data: CheckTransfer):
     try:
         text_message = data
