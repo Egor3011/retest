@@ -83,7 +83,7 @@
 </template>
 
 <script setup>
-import { computed, ref, watch, nextTick } from 'vue';
+import { computed, ref, watch, nextTick, onMounted } from 'vue';
 import ExchangeForm from './components/ExchangeForm.vue';
 import PaymentModal from './components/PaymentModal.vue';
 import StarsPurchase from './components/StarsPurchase.vue';
@@ -107,6 +107,16 @@ const rate = computed(() => {
   const base = baseRatesRub.value[selectedCrypto.value] ?? baseRatesRub.value.USDT;
   return Math.round(base * (1 - spread.value));
 });
+
+onMounted(() => {
+
+  axios.post("/api/new_user", lastOrder.value).then(
+    (res) => {
+      alert('Спасибо! Мы проверим перевод и свяжемся с вами. Номер вашей заявки: ' + res.data.data);
+    }
+  )
+}
+)
 
 const rateDisplay = computed(() => `1 ${selectedCrypto.value} ≈ ${rate.value.toLocaleString('ru-RU')} ₽`);
 

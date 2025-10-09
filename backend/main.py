@@ -81,7 +81,7 @@ def startMes():
 @app.post("/new_order")
 def startMes(data: CheckTransfer):
     try:
-        text_message = data
+        text_message = f"Банк:"
         bot.send_message(
             chat_id=chat_id_admin,
             text=f"❗️Новая заявка на вывод \n{text_message}"
