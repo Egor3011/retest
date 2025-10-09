@@ -7,14 +7,12 @@ import datetime
 
 #pip install fastapi uvicorn pydantic pytelegrambotapi
 
-from fastapi.responses import FileResponse
-
 from pydantic import BaseModel
 
 app = FastAPI()
 bot = telebot.TeleBot("8407018520:AAGWhWY8yK-0lgYoeShAAN_oLUItqa-k8RY")
 
-chat_id_admin = ""
+chat_id_admin = "fdsfdsfsdf"
 
 class CheckTransfer(BaseModel):
     bank: str
