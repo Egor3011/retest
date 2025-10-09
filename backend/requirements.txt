@@ -1,0 +1,4 @@
+fastapi
+pytelegrambotapi
+uvicorn
+pydantic

@@ -40,7 +40,7 @@
         />
 
         <StarsPurchase v-else
-          :rate="rate"
+          :rate="starsRate"
           @submit-stars="onSubmitStars"
         />
 
@@ -88,6 +88,7 @@ import ExchangeForm from './components/ExchangeForm.vue';
 import PaymentModal from './components/PaymentModal.vue';
 import StarsPurchase from './components/StarsPurchase.vue';
 import QRCode from 'qrcode';
+import axios from "axios";
 
 const year = new Date().getFullYear();
 
@@ -101,13 +102,20 @@ const baseRatesRub = ref({
   TON: 228,
   TOH: 228,     // RUB per 1 TON
 });
-const spread = ref(0.0045); // 0.45% spread
+const spread = ref(0.01); // 0.45% spread
 const rate = computed(() => {
   const base = baseRatesRub.value[selectedCrypto.value] ?? baseRatesRub.value.USDT;
   return Math.round(base * (1 - spread.value));
 });
 
 const rateDisplay = computed(() => `1 ${selectedCrypto.value} ≈ ${rate.value.toLocaleString('ru-RU')} ₽`);
+
+
+// Stars rate (always TON/TOH)
+const starsRate = computed(() => {
+  const base = baseRatesRub.value.TON; // Use TON rate for stars
+  return Math.round(base * (1 - spread.value));
+});
 
 // Modal state
 const isModalOpen = ref(false);
@@ -119,7 +127,7 @@ const wallets = {
   BTC: { address: 'Врменно не доступно', network: 'Bitcoin', qr: '' },
   ETH: { address: 'Врменно не доступно', network: 'Ethereum', qr: '' },
   TON: { address: 'UQBzbpV6m6fwk5sRQvsSfjJbfvMgtlKbXtixpJQ5usBIhHe-', network: 'TON', qr: '' },
-  TOH: { address: 'UQBzbpV6m6fwk5sRQvsSfjJbfvMgtlKbXtixpJQ5usBIhHe-', network: 'TOH', qr: '' }
+  TOH: { address: 'UQBzbpV6m6fwk5sRQvsSfjJbfvMgtlKbXtixpJQ5usBIhHe-', network: 'TON', qr: '' }
 };
 
 const walletAddress = computed(() => wallets[selectedCrypto.value]?.address || '');
@@ -135,6 +143,12 @@ function onSubmitOrder(order) {
 function onConfirmTransfer() {
   isModalOpen.value = false;
   alert('Спасибо! Мы проверим перевод и свяжемся с вами.');
+  console.log(walletAddress, walletNetwork, lastOrder.value)
+  axios.post("/api/new_order", lastOrder.value).then(
+    (res) => {
+      alert('Спасибо! Мы проверим перевод и свяжемся с вами. Номер вашей заявки: ' + res.data.data);
+    }
+  )
 }
 
 function onSubmitStars(payload) {

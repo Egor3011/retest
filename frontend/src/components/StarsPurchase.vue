@@ -20,6 +20,7 @@
           <img :src="coinLogo" alt="coin" class="coin-logo" />
           <select v-model="crypto">
             <option value="TON">TON</option>
+            <option value="TOH">TOH</option>
           </select>
           <span class="suffix">{{ crypto }}</span>
         </div>
@@ -28,7 +29,7 @@
 
     <div class="grid-2">
       <div class="field">
-        <label>Цена (в RUB)</label>
+        <label>Цена в RUB ( 1 ⭐ = {{ rub / stars }} RUB ) </label>
         <div class="input" style="cursor:not-allowed">
           <input :value="rubDisplay" readonly />
           <span class="suffix">RUB</span>
@@ -67,14 +68,14 @@ const emit = defineEmits(['submit-stars']);
 
 const state = reactive({
   stars: 250,
-  crypto: 'USDT',
+  crypto: 'TON',
   telegram: ''
 });
 
 const { stars, crypto, telegram } = toRefs(state);
 const rate = computed(() => props.rate);
 
-const rub = computed(() => Math.ceil(stars.value * 1.1)); // пример: 1⭐ ≈ 1.1 RUB
+const rub = computed(() => Math.ceil(stars.value * 1.13)); // пример: 1⭐ ≈ 1.2 RUB
 const cryptoAmount = computed(() => Number((rub.value / rate.value).toFixed(6)));
 const rubDisplay = computed(() => rub.value.toLocaleString('ru-RU'));
 const cryptoAmountDisplay = computed(() => cryptoAmount.value.toString());
@@ -93,8 +94,8 @@ function submit() {
 }
 
 const coinLogo = computed(() => {
-  const map = { USDT: '/coins/tether.svg', BTC: '/coins/Bitcoin.svg.png', ETH: '/coins/ethereum-eth.svg', TON: '/coins/ton_symbol.png' };
-  return map[crypto.value] || '/coins/tether.svg';
+  const map = { TON: '/coins/ton_symbol.png', TOH: '/coins/ton_symbol.png' }; // TOH uses TON icon
+  return map[crypto.value] || '/coins/ton_symbol.png';
 });
 </script>
 
