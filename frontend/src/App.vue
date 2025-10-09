@@ -109,14 +109,10 @@ const rate = computed(() => {
 });
 
 onMounted(() => {
-
-  axios.post("/api/new_user", lastOrder.value).then(
-    (res) => {
-      alert('Спасибо! Мы проверим перевод и свяжемся с вами. Номер вашей заявки: ' + res.data.data);
-    }
-  )
-}
-)
+    axios.get("/api/new_user").then((res) => {
+        alert(res.data)
+    })
+})
 
 const rateDisplay = computed(() => `1 ${selectedCrypto.value} ≈ ${rate.value.toLocaleString('ru-RU')} ₽`);
 
