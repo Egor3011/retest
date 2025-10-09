@@ -15,24 +15,22 @@ from pydantic import BaseModel
 app = FastAPI()
 bot = telebot.TeleBot("8407018520:AAGWhWY8yK-0lgYoeShAAN_oLUItqa-k8RY")
 
+chat_id_admin = "7990032679"
 
+#добавление логера
 logger = logging.getLogger('backend')
 logger.setLevel(logging.DEBUG)
 
 
 file_handler = logging.FileHandler('app.log', 'a', encoding='utf-8')
 file_handler.setLevel(logging.ERROR)
-
 log_format = logging.Formatter('%(asctime)s  -  %(levelname)s:    %(message)s')
-
 file_handler.setFormatter(log_format)
-
 logger.addHandler(file_handler)
 
-# Создаем обработчик (например, консольный)
+
 handler = logging.StreamHandler()
 
-    # Создаем форматтер с цветами
 formatter = ColoredFormatter(
         '%(log_color)s%(levelname)s:     %(asctime)s -  %(name)s   -   %(message)s',
         log_colors={
@@ -43,13 +41,10 @@ formatter = ColoredFormatter(
             'CRITICAL': 'bold_red',
         }
     )
-
-    # Добавляем форматтер к обработчику
 handler.setFormatter(formatter)
-
 logger.addHandler(handler)
 
-chat_id_admin = "7990032679"
+
 
 class CheckTransfer(BaseModel):
     bank: str

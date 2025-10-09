@@ -99,8 +99,8 @@ const baseRatesRub = ref({
   USDT: 81,   // RUB per 1 USDT
   BTC: 10395823,  // RUB per 1 BTC
   ETH: 387248,   // RUB per 1 ETH
-  TON: 228,
-  TOH: 228,     // RUB per 1 TON
+  TON: 216,
+  TOH: 216,     // RUB per 1 TON
 });
 const spread = ref(0.01); // 0.45% spread
 const rate = computed(() => {
