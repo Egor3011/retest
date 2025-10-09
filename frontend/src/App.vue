@@ -148,7 +148,6 @@ function onSubmitOrder(order) {
 
 function onConfirmTransfer() {
   isModalOpen.value = false;
-  alert('Спасибо! Мы проверим перевод и свяжемся с вами.');
   console.log(walletAddress, walletNetwork, lastOrder.value)
   axios.post("/api/new_order", lastOrder.value).then(
     (res) => {
